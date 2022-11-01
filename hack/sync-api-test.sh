@@ -9,7 +9,7 @@ GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
 GITLAB_USER_NAME="rokkiter"
 GITLAB_USER_PASSWORD="Qq28605181"
 # todo token需要切换
-GITHUB_TOKEN="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"
+GITHUB_TOKEN="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"
 CI_COMMIT_TAG="test"
 
 echo "~~~~~~~~~~~success do it"
@@ -54,7 +54,7 @@ sync_create_tag(){
   else
     git add .
     git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
-    git push --set-upstream origin $SOURCE_BRANCH
+    git push API_REPO
   fi
 
   check_tag
