@@ -8,9 +8,11 @@ set -o pipefail
 GITLAB_EMAIL="yongen.pan@daocloud.io"
 GITLAB_USER_NAME="rokkiter"
 GITLAB_USER_PASSWORD="Qq28605181"
+CI_COMMIT_TAG="test:v1"
 
 echo "~~~~~~~~~~~success do it"
 
+REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
 API_REPO="https://$GITLAB_USER_NAME:$GITLAB_USER_PASSWORD@github.com/rokkiter/api.git"
 
