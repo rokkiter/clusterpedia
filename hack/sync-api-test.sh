@@ -10,13 +10,13 @@ GITLAB_USER_NAME="rokkiter"
 GITLAB_USER_PASSWORD="Qq28605181"
 # todo token需要切换
 GITHUB_TOKEN="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"
-CI_COMMIT_TAG="test:v1"
+CI_COMMIT_TAG="test"
 
 echo "~~~~~~~~~~~success do it"
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
-API_REPO="https://$GITLAB_USER_NAME:$GITHUB_TOKEN@github.com/rokkiter/api.git"
+API_REPO="https://$GITHUB_TOKEN@github.com/rokkiter/api.git"
 
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 echo "------dir:$TMP_DIR"
@@ -59,7 +59,7 @@ sync_create_tag(){
 
   check_tag
   git tag $CI_COMMIT_TAG -a -m "create tag"
-  git push origin $CI_COMMIT_TAG
+  git push $API_REPO
   echo "push tag success~"
 
   cd -
