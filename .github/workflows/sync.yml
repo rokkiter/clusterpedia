@@ -25,4 +25,5 @@ jobs:
       - run: |
           git clone https://${GITHUB_TOKEN}@github.com/rokkiter/api.git /tmp/clusterpedia-api-test
           cd /tmp/clusterpedia-api-test
+          git remote add origin1 "https://${GITHUB_TOKEN}@github.com/rokkiter/api.git"
           git push origin main
