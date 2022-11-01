@@ -54,7 +54,7 @@ sync_create_tag(){
   else
     git add .
     git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
-    echo $Token
+    git remote get-url origin
     echo $API_REPO
     echo "----1"
     git push
