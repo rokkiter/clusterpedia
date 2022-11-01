@@ -16,4 +16,5 @@ jobs:
       run:
         working-directory: ${{ env.WORKSPACE }}
     steps:
+      - run: pwd
       - run: hack/sync-api.sh
