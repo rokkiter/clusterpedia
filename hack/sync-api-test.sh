@@ -33,7 +33,7 @@ sync_create_tag(){
   then
     echo "----api repo is not diff~"
   else
-    check_tag()
+    check_tag
     git add .
     git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
     git push
