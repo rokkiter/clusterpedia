@@ -13,7 +13,7 @@ jobs:
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
       GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
