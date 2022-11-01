@@ -21,7 +21,7 @@ jobs:
         with:
           path: ${{ env.WORKSPACE }}
       - name: Sync code
-      - run: echo ${{ github.actor }}
         with:
         token: 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
+      - run: echo ${{ github.actor }}
       - run: hack/sync-api-test.sh
