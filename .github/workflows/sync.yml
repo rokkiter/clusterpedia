@@ -14,14 +14,7 @@ jobs:
     name: Sync Api
     runs-on: ubuntu-latest
     env:
-      WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
-    defaults:
-      run:
-        working-directory: ${{ env.WORKSPACE }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          path: ${{ env.WORKSPACE }}
-      - run: hack/sync-api-test.sh
+        run: hack/sync-api-test.sh
