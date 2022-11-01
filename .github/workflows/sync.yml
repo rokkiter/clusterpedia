@@ -4,8 +4,11 @@ on:
 #     TODO 在测试分支测试
     branches:
       - sync-api
+#    TODO 需要确认打tag时是否需要对api改动后才同步tag
     tags:
       - v*
+    paths:
+      - 'staging/src/github.com/clusterpedia-io/api/*'
 jobs:
   sync-api:
     name: Sync Api
