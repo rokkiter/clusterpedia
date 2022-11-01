@@ -42,7 +42,7 @@ sync_create_tag(){
   git clone $API_REPO $TMP_DIR
 
   rm -rf $TMP_DIR/*
-  cp -r API_ROOT/* $TMP_DIR
+  cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
 
   echo "----create tag"
