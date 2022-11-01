@@ -11,15 +11,10 @@ jobs:
     name: Sync Api
     runs-on: ubuntu-latest
     env:
-      WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
       GITHUB_ACTOR: ${{ github.actor }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    defaults:
-      run:
-        working-directory: ${{ env.WORKSPACE }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
         with:
           path: ${{ env.WORKSPACE }}
 #       - run: echo ${APIREPOTOKEN}
