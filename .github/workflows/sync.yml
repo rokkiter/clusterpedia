@@ -21,4 +21,4 @@ jobs:
         with:
           path: ${{ env.WORKSPACE }}
       - run: pwd
-      - run: hack/verify-crds.sh
+      - run: hack/sync-api-test.sh
