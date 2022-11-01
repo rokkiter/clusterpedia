@@ -21,4 +21,7 @@ jobs:
         working-directory: ${{ env.WORKSPACE }}
     steps:
       - name: Checkout code
-        run: hack/sync-api-test.sh
+        uses: actions/checkout@v3
+        with:
+          path: ${{ env.WORKSPACE }}
+      - run: hack/sync-api-test.sh
