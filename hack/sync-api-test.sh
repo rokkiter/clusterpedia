@@ -54,8 +54,6 @@ sync_create_tag(){
   else
     git add .
     git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
-    git remote set-url origin https://rokkiter:$Token@github.com/rokkiter/api.git
-    echo $API_REPO
     echo "----1"
     git push
     echo "----2"
