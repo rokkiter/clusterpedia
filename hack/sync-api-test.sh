@@ -11,8 +11,17 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
 API_REPO="https://$Token@github.com/rokkiter/api.git"
 
+GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
+GITLAB_USER_NAME="rokkiter"
+
 # api仓库暂存地址
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
+
+# init name && email config
+init_config(){
+  git config --global user.email "$GITLAB_EMAIL"
+  git config --global user.name "$GITLAB_USER_NAME"
+}
 
 check_tag(){
   if [ -n "$(git ls-remote --tags origin -l $CI_COMMIT_TAG)" ]; then
@@ -47,5 +56,6 @@ sync_create_tag(){
   rm -rf $TMP_DIR
 }
 
+init_config
 
 sync_create_tag
