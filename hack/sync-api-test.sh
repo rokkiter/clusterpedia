@@ -31,7 +31,7 @@ init_config(){
 }
 
 # check tag, if exist, delete it
-check_tag(){
+check_tag(){``
   if [ -n "$(git ls-remote --tags origin -l $CI_COMMIT_TAG)" ]; then
     echo "tag already exist, delete it before retag"
     git push -d origin $CI_COMMIT_TAG
