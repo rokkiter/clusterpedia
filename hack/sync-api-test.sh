@@ -59,7 +59,7 @@ sync_create_tag(){
     git push
   fi
 
-  check_tag
+#  check_tag
   git tag $CI_COMMIT_TAG -a -m "create tag"
   git push
   echo "push tag success~"
