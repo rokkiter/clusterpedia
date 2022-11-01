@@ -9,14 +9,14 @@ GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
 GITLAB_USER_NAME="rokkiter"
 GITLAB_USER_PASSWORD="Qq28605181"
 # todo token需要切换
-GITHUB_TOKEN=${APIREPOTOKEN}
+Token=${APIREPOTOKEN}
 CI_COMMIT_TAG="test"
 
 echo "~~~~~~~~~~~success do it"
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
-API_REPO="https://$GITHUB_TOKEN@github.com/rokkiter/api.git"
+API_REPO="https://$Token@github.com/rokkiter/api.git"
 
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 echo "------dir:$TMP_DIR"
@@ -54,7 +54,7 @@ sync_create_tag(){
   else
     git add .
     git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
-    echo $GITHUB_TOKEN
+    echo $Token
     echo $API_REPO
     echo "----1"
     git push
