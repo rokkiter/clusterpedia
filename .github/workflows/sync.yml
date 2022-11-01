@@ -9,7 +9,7 @@ on:
 jobs:
   sync-api:
     name: Sync Api
-    runs-on: ubuntulatest
+    runs-on: ubuntu-latest
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
     steps:
