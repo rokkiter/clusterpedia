@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 
 
-GITLAB_EMAIL="yongen.pan@daocloud.io"
+GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
 GITLAB_USER_NAME="rokkiter"
 GITLAB_USER_PASSWORD="Qq28605181"
 # todo token需要切换
