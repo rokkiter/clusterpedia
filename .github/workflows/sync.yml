@@ -13,4 +13,4 @@ jobs:
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
     steps:
-      - run: hack/sync.sh
+      - run: hack/sync-api.sh
