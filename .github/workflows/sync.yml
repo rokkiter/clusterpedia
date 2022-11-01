@@ -19,6 +19,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          path: ${{ env.WORKSPACE }}
+          - path: ${{ env.WORKSPACE }}
+          - token: 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
       - run: pwd
       - run: hack/sync-api-test.sh
