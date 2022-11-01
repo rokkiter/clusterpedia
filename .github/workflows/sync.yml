@@ -1,0 +1,16 @@
+name: Sync Api
+on:
+  push:
+#     TODO 在测试分支测试
+    branches:
+      - sync-api
+    tags:
+      - v*
+jobs:
+  sync-api:
+    name: Sync Api
+    runs-on: ubuntulatest
+    env:
+      WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
+    steps:
+      - run: hack/sync.sh
