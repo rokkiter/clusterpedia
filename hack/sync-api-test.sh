@@ -9,7 +9,7 @@ GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
 GITLAB_USER_NAME="rokkiter"
 GITLAB_USER_PASSWORD="Qq28605181"
 # todo token需要切换
-GITHUB_TOKEN="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"
+GITHUB_TOKEN=${APIREPOTOKEN}
 CI_COMMIT_TAG="test"
 
 echo "~~~~~~~~~~~success do it"
