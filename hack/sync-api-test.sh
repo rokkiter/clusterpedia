@@ -56,7 +56,9 @@ sync_create_tag(){
     git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
     echo $GITHUB_TOKEN
     echo $API_REPO
+    echo "----1"
     git push
+    echo "----2"
   fi
 
 #  check_tag
