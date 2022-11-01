@@ -12,6 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
+    defaults:
+      run:
+        working-directory: ${{ env.WORKSPACE }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: ${{ env.WORKSPACE }}
       - run: pwd
       - run: hack/sync-api.sh
