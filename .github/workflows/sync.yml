@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
@@ -22,9 +21,5 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: ${{ env.WORKSPACE }}
-        - run: |
-          git clone https://${GITHUB_TOKEN}@github.com/rokkiter/api.git /tmp/clusterpedia-api-test
-          cd /tmp/clusterpedia-api-test
-          git remote add origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/rokkiter/api.git"
-          git push origin main
-
+      - run: echo ${APIREPOTOKEN}
+      - run: hack/sync-api-test.sh
