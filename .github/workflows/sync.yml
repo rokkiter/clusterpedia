@@ -28,3 +28,5 @@ jobs:
           path: ${{ env.WORKSPACE }}
           ref: ${{ github.ref }}
       - run: hack/sync-api-test.sh
+
+
