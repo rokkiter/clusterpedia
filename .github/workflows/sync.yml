@@ -6,7 +6,6 @@ on:
       - sync-api
     paths:
       - 'staging/src/github.com/clusterpedia-io/api/*'
-  push:
     tags:
       - v*
 jobs:
