@@ -51,7 +51,7 @@ sync_create_tag(){
 
   if [ $REFTYPE == "tag" ]; then
       check_tag
-      git tag $CI_COMMIT_TAG -a -m TAG_MESSAGE
+      git tag $CI_COMMIT_TAG -a -m $TAG_MESSAGE
       git push origin $CI_COMMIT_TAG
       echo "push tag success~"
     else
