@@ -18,6 +18,8 @@ GITLAB_USER_NAME="rokkiter"
 # api仓库暂存地址
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
+TAG_MESSAGE=$(git tag -l --format='%(contents)' $TAGNAME)
+
 # init name && email config
 init_config(){
   git config --global user.email "$GITLAB_EMAIL"
@@ -41,11 +43,11 @@ sync_create_tag(){
 
   git add .
 
-  echo $TAGMESSAGE
+  echo TAG_MESSAGE
 
   if [ $REFTYPE == "tag" ]; then
       check_tag
-      git tag $CI_COMMIT_TAG -a -m $TAGMESSAGE
+      git tag $CI_COMMIT_TAG -a -m TAG_MESSAGE
       git push origin $CI_COMMIT_TAG
       echo "push tag success~"
     else
