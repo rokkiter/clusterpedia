@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 
 Token=${APIREPOTOKEN}
-CI_COMMIT_TAG="test"
+CI_COMMIT_TAG=$TAGNAME
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
@@ -47,7 +47,7 @@ sync_create_tag(){
       check_tag
       git commit -m $MESSAGE
       git push
-      git tag $CI_COMMIT_TAG -a -m "create tag"
+      git tag $CI_COMMIT_TAG -a -m $MESSAGE
       git push origin $CI_COMMIT_TAG
       echo "push tag success~"
     else
