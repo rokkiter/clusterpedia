@@ -47,7 +47,7 @@ sync_create_tag(){
 
   if [ $REFTYPE == "tag" ]; then
       check_tag
-      git tag $TAGNAME -a -m $TAG_MESSAGE
+      git tag $TAGNAME -a -m "${TAG_MESSAGE}"
       git push origin $TAGNAME
       echo "push tag success~"
     else
