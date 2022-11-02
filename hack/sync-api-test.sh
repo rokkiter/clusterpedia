@@ -11,6 +11,7 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
 API_REPO="https://$Token@github.com/rokkiter/api.git"
 
+# 放到secret里面
 GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
 GITLAB_USER_NAME="rokkiter"
 
@@ -40,6 +41,10 @@ sync_create_tag(){
 
   check_tag
   git add .
+
+  echo $REFTYPE
+
+  # todo commit 信息需要
   git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
   git push
 

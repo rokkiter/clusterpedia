@@ -6,6 +6,8 @@ on:
       - sync-api
     paths:
       - 'staging/src/github.com/clusterpedia-io/api/*'
+    tags:
+      - v*
 jobs:
   sync-api:
     name: Sync Api
@@ -13,6 +15,7 @@ jobs:
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
+      REFTYPE: ${{ github.ref_type }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
@@ -22,29 +25,3 @@ jobs:
         with:
           path: ${{ env.WORKSPACE }}
       - run: hack/sync-api-test.sh
-#
-# on:
-#   push:
-#   # TODO 后续需要改成main分支
-#     branches:
-#       - sync-api
-# #    TODO 需要确认打tag时是否需要对api改动后才同步tag
-#     tags:
-#       - v*
-# jobs:
-#   sync-api:
-#     name: Sync Api
-#     runs-on: ubuntu-latest
-#     env:
-#       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
-#       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
-#       NEEDTAG: true
-#     defaults:
-#       run:
-#         working-directory: ${{ env.WORKSPACE }}
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-#         with:
-#           path: ${{ env.WORKSPACE }}
-#       - run: hack/sync-api-test.sh
