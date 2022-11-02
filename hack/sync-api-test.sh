@@ -4,12 +4,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-Token=${APIREPOTOKEN}
-CI_COMMIT_TAG=$TAGNAME
-
 REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
-API_REPO="https://$Token@github.com/rokkiter/api.git"
+API_REPO="https://$APIREPOTOKEN@github.com/rokkiter/api.git"
 
 # todo 放到secret里面
 GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
@@ -22,9 +19,6 @@ TAG_MESSAGE=""
 
 # 获取 clusterpedia 的 tag message
 init_tag_message(){
-  git tag
-  git tag -l --format="%(contents)" $TAGNAME
-  echo $MESSAGE
   TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 }
 
@@ -35,10 +29,10 @@ init_config(){
 }
 
 check_tag(){
-  if [ -n "$(git ls-remote --tags origin -l $CI_COMMIT_TAG)" ]; then
+  if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
     echo "tag already exist, delete it before retag"
-    git push -d origin $CI_COMMIT_TAG
-    git tag -d $CI_COMMIT_TAG
+    git push -d origin $TAGNAME
+    git tag -d $TAGNAME
   fi
 }
 
@@ -53,8 +47,8 @@ sync_create_tag(){
 
   if [ $REFTYPE == "tag" ]; then
       check_tag
-      git tag $CI_COMMIT_TAG -a -m $TAG_MESSAGE
-      git push origin $CI_COMMIT_TAG
+      git tag $TAGNAME -a -m $TAG_MESSAGE
+      git push origin $TAGNAME
       echo "push tag success~"
     else
       git commit -m $MESSAGE
