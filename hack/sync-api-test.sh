@@ -18,7 +18,11 @@ GITLAB_USER_NAME="rokkiter"
 # api仓库暂存地址
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
-TAG_MESSAGE=$(git tag -l --format='%(contents)' $TAGNAME)
+TAG_MESSAGE=""
+
+init_tag_message(){
+  TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
+}
 
 # init name && email config
 init_config(){
@@ -60,6 +64,10 @@ sync_create_tag(){
   cd -
   rm -rf $TMP_DIR
 }
+
+if [ $REFTYPE == "tag" ]; then
+    init_tag_message
+fi
 
 init_config
 
