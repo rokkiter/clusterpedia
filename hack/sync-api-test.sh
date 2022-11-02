@@ -39,18 +39,23 @@ sync_create_tag(){
   cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
 
-  check_tag
   git add .
 
-  echo $REFTYPE
+  echo $MESSAGE
 
-  # todo commit 信息需要
-  git commit -m "tag:$CI_COMMIT_TAG sync api folder from ghippo repo"
-  git push
+  if [ $REFTYPE == "tag" ]; then
+      check_tag
+      git commit -m $MESSAGE
+      git push
+      git tag $CI_COMMIT_TAG -a -m "create tag"
+      git push origin $CI_COMMIT_TAG
+      echo "push tag success~"
+    else
+      # todo commit 信息需要
+      git commit -m $MESSAGE
+      git push
+  fi
 
-  git tag $CI_COMMIT_TAG -a -m "create tag"
-  git push origin $CI_COMMIT_TAG
-  echo "push tag success~"
 
   cd -
   rm -rf $TMP_DIR
