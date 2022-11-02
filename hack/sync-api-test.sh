@@ -11,17 +11,19 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
 API_REPO="https://$Token@github.com/rokkiter/api.git"
 
-# 放到secret里面
+# todo 放到secret里面
 GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
 GITLAB_USER_NAME="rokkiter"
 
-# api仓库暂存地址
+# api仓库暂存文件夹
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
 TAG_MESSAGE=""
 
 # 获取 clusterpedia 的 tag message
 init_tag_message(){
+  git tag
+  git tag -l --format="%(contents)" $TAGNAME
   TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 }
 
@@ -48,8 +50,6 @@ sync_create_tag(){
 
   git add .
 
-  echo $TAG_MESSAGE
-
   if [ $REFTYPE == "tag" ]; then
       check_tag
       git tag $CI_COMMIT_TAG -a -m $TAG_MESSAGE
@@ -65,10 +65,10 @@ sync_create_tag(){
   rm -rf $TMP_DIR
 }
 
+init_config
+
 if [ $REFTYPE == "tag" ]; then
     init_tag_message
 fi
-
-init_config
 
 sync_create_tag
