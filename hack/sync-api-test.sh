@@ -23,7 +23,7 @@ init_config(){
 }
 
 check_branch(){
-  if [ -z git ls-remote --exit-code --heads origin $BRANCHNAME ]; then
+  if [ -z "$(git ls-remote --exit-code --heads origin $BRANCHNAME)" ]; then
     echo "remote branch does not exist, create it"
     git checkout -b $BRANCHNAME
     git push origin $BRANCHNAME:$BRANCHNAME
