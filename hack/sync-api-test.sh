@@ -20,6 +20,7 @@ TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
 TAG_MESSAGE=""
 
+# 获取 clusterpedia 的 tag message
 init_tag_message(){
   TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 }
@@ -47,7 +48,7 @@ sync_create_tag(){
 
   git add .
 
-  echo TAG_MESSAGE
+  echo $TAG_MESSAGE
 
   if [ $REFTYPE == "tag" ]; then
       check_tag
@@ -55,7 +56,6 @@ sync_create_tag(){
       git push origin $CI_COMMIT_TAG
       echo "push tag success~"
     else
-      # todo commit 信息需要
       git commit -m $MESSAGE
       git push
   fi
