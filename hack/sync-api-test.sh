@@ -24,6 +24,7 @@ TAG_MESSAGE=""
 init_tag_message(){
   git tag
   git tag -l --format="%(contents)" $TAGNAME
+  echo $MESSAGE
   TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 }
 
