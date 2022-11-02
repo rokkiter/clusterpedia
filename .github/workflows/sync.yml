@@ -6,8 +6,6 @@ on:
       - sync-api
     paths:
       - 'staging/src/github.com/clusterpedia-io/api/*'
-    tags:
-      - v*
 jobs:
   sync-api:
     name: Sync Api
@@ -15,9 +13,8 @@ jobs:
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
-      REFTYPE: ${{ github.ref_type }}
-      TAGNAME: ${{ github.ref_name }}
       MESSAGE: ${{ github.event.head_commit.message }}
+      BRANCHNAME: ${{ github.ref_name }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}

@@ -15,12 +15,6 @@ GITLAB_USER_NAME="rokkiter"
 # api仓库暂存文件夹
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
-TAG_MESSAGE=""
-
-# 获取 clusterpedia 的 tag message
-init_tag_message(){
-  TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
-}
 
 # init name && email config
 init_config(){
@@ -28,11 +22,11 @@ init_config(){
   git config --global user.name "$GITLAB_USER_NAME"
 }
 
-check_tag(){
-  if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
-    echo "tag already exist, delete it before retag"
-    git push -d origin $TAGNAME
-    git tag -d $TAGNAME
+check_branch(){
+  if[ ! -n git ls-remote --exit-code --heads origin $BRANCHNAME ]; then
+    echo "remote branch does not exist, create it"
+    git checkout -b $BRANCHNAME
+    git push origin $BRANCHNAME:$BRANCHNAME
   fi
 }
 
@@ -43,27 +37,16 @@ sync_create_tag(){
   cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
 
+  check_branch
   git add .
 
-  if [ $REFTYPE == "tag" ]; then
-      check_tag
-      git tag $TAGNAME -a -m "${TAG_MESSAGE}"
-      git push origin $TAGNAME
-      echo "push tag success~"
-    else
-      git commit -m $MESSAGE
-      git push
-  fi
-
+  git commit -m $MESSAGE
+  git push
 
   cd -
   rm -rf $TMP_DIR
 }
 
 init_config
-
-if [ $REFTYPE == "tag" ]; then
-    init_tag_message
-fi
 
 sync_create_tag
