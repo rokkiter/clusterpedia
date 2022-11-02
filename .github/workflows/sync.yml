@@ -17,7 +17,7 @@ jobs:
       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
       REFTYPE: ${{ github.ref_type }}
       TAGNAME: ${{ github.ref_name }}
-      MESSAGE: ${{ github.event.head_commit.message }}
+      MESSAGE: ${{ github.event.commits[0].message }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
