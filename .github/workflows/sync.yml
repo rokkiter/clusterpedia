@@ -1,9 +1,6 @@
 name: Sync Api
 on:
   push:
-#     TODO 在测试分支测试
-    branches:
-      - sync-api
     paths:
       - 'staging/src/github.com/clusterpedia-io/api/*'
 jobs:
