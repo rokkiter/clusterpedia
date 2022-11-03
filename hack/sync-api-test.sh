@@ -12,7 +12,7 @@ API_REPO="https://$APIREPOTOKEN@github.com/rokkiter/api.git"
 GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
 GITLAB_USER_NAME="rokkiter"
 
-# api仓库暂存文件夹
+# api仓库暂存文件路径
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
 
@@ -30,7 +30,7 @@ check_branch(){
   fi
 }
 
-sync_create_tag(){
+sync_api(){
   git clone $API_REPO $TMP_DIR
 
   rm -rf $TMP_DIR/*
@@ -49,4 +49,4 @@ sync_create_tag(){
 
 init_config
 
-sync_create_tag
+sync_api
