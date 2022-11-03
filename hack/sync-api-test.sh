@@ -74,7 +74,7 @@ sync_api(){
     echo "push tag success~"
 
     else
-      git filter-repo --subdirectory-filterstaging/src/github.com/clusterpedia-io/api --force
+      git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
       git remote add origin API_REPO
       check_branch
       git push origin $BRANCH_NAME
