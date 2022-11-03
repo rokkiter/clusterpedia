@@ -58,29 +58,29 @@ check_branch(){
 sync_api(){
 
   if [ $REFTYPE == "tag" ]; then
-    git clone $API_REPO $TMP_DIR
-    cd $TMP_DIR
-    check_branch
-    cd -
+      git clone $API_REPO $TMP_DIR
+      cd $TMP_DIR
+      check_branch
+      cd -
 
-    rm -rf $TMP_DIR/*
-    cp -r $API_ROOT/* $TMP_DIR
-    cd $TMP_DIR
+      rm -rf $TMP_DIR/*
+      cp -r $API_ROOT/* $TMP_DIR
+      cd $TMP_DIR
 
-    check_tag
-    git tag $TAGNAME -a -m $TAG_MESSAGE
-    git push origin $TAGNAME
-    echo "push tag success~"
-
+      check_tag
+      git tag $TAGNAME -a -m $TAG_MESSAGE
+      git push origin $TAGNAME
+      echo "push tag success~"
+      cd -
+      rm -rf $TMP_DIR
     else
       git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
-      git remote add origin_api $API_REPO
+      git remote add origin $API_REPO
       check_branch
-      git push origin_api $BRANCH_NAME
+      git push origin $BRANCH_NAME
   fi
 
-  cd -
-  rm -rf $TMP_DIR
+
 }
 
 install_filter_repo
