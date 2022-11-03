@@ -14,7 +14,8 @@ GITLAB_USER_NAME="rokkiter"
 
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
-BRANCHNAME=$(git symbolic-ref --short HEAD)
+raw=$(git branch -r --contains ${{ github.ref }})
+BRANCH_NAME=${raw/origin\/}
 
 echo
 # init name && email config
@@ -33,10 +34,10 @@ check_tag(){
 }
 
 check_branch(){
-  if [ -z "$(git ls-remote --exit-code --heads origin $BRANCHNAME)" ]; then
+  if [ -z "$(git ls-remote --exit-code --heads origin $BRANCH_NAME)" ]; then
     echo "remote branch does not exist, create it"
-    git checkout -b $BRANCHNAME
-    git push --set-upstream origin $BRANCHNAME
+    git checkout -b $BRANCH_NAME
+    git push --set-upstream origin $BRANCH_NAME
   fi
 }
 

@@ -13,6 +13,7 @@ jobs:
       MESSAGE: ${{ github.event.head_commit.message }}
       REFTYPE: ${{ github.ref_type }}
       TAGNAME: ${{ github.ref_name }}
+      REF: ${{ github.ref }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
