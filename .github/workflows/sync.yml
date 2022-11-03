@@ -23,6 +23,7 @@ jobs:
         with:
           path: ${{ env.WORKSPACE }}
           ref: ${{ github.ref }}
+          fetch-depth: 0
       - run: hack/sync-api-test.sh
 
 
