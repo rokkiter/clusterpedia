@@ -57,7 +57,6 @@ check_branch(){
 
 sync_api(){
 
-
   if [ $REFTYPE == "tag" ]; then
     git clone $API_REPO $TMP_DIR
     cd $TMP_DIR
