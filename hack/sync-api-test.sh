@@ -14,8 +14,6 @@ GITLAB_USER_NAME="rokkiter"
 
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
-
-
 TAG_MESSAGE=""
 
 # 获取 clusterpedia 的 tag message
@@ -60,7 +58,7 @@ sync_api(){
 
  if [ $REFTYPE == "tag" ]; then
       check_tag
-      git tag $REFNAME -a -m $TAG_MESSAGEE
+      git tag $REFNAME -a -m $TAG_MESSAGE
       git push origin $REFNAME
       echo "push tag success~"
     else
