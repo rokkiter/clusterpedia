@@ -6,7 +6,7 @@ set -o pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
-API_REPO="https://$APIREPOTOKEN@github.com/rokkiter/api.git"
+API_REPO="https://$API_REPO_TOKEN@github.com/rokkiter/api.git"
 
 # todo 放到secret里面
 GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
@@ -61,8 +61,6 @@ sync_api(){
   rm -rf $TMP_DIR/*
   cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
-
-
 
  if [ $REFTYPE == "tag" ]; then
       git push
