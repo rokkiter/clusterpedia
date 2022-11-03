@@ -55,11 +55,12 @@ check_branch(){
 sync_api(){
   git clone $API_REPO $TMP_DIR
 
+  check_branch
+
   rm -rf $TMP_DIR/*
   cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
 
-  check_branch
 
  if [ $REFTYPE == "tag" ]; then
       check_tag
