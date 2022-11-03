@@ -12,7 +12,8 @@ jobs:
       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
       MESSAGE: ${{ github.event.head_commit.message }}
       REFTYPE: ${{ github.ref_type }}
-      REFNAME: ${{ github.ref_name }}
+      TAGNAME: ${{ github.ref_name }}
+      REF: ${{ github.ref }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
@@ -22,12 +23,6 @@ jobs:
         with:
           path: ${{ env.WORKSPACE }}
           ref: ${{ github.ref }}
-#       - run: hack/sync-api-test.sh
-      - name: Sync code
-        with:
-          ref: ${{ github.ref }}
-        run: |
-          raw=$(git branch -r --contains ${{ github.ref }})
-          branch=${raw/origin\/}
-          echo $branch
+      - run: hack/sync-api-test.sh
+
 
