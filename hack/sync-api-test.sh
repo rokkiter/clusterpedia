@@ -82,6 +82,8 @@ sync_api(){
   rm -rf $TMP_DIR
 }
 
+install_filter_repo()
+
 init_tag_message
 
 init_config
