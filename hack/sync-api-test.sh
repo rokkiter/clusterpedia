@@ -14,10 +14,17 @@ GITLAB_USER_NAME="rokkiter"
 
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
-raw=$(git branch -r --contains $REF)
-BRANCH_NAME=${raw/origin\/}
 
-echo "test" $BRANCH_NAME
+
+TAG_MESSAGE=""
+
+# 获取 clusterpedia 的 tag message
+init_tag_message(){
+  TAG_MESSAGE=$(git tag -l --format="%(contents)" $REFNAME)
+}
+
+
+echo "test" $REFNAME
 
 
 # init name && email config
@@ -28,18 +35,18 @@ init_config(){
 
 # check tag, if exist, delete it
 check_tag(){
-  if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
+  if [ -n "$(git ls-remote --tags origin -l $REFNAME)" ]; then
     echo "tag already exist, delete it before retag"
-    git push -d origin $TAGNAME
-    git tag -d $TAGNAME
+    git push -d origin $REFNAME
+    git tag -d $REFNAME
   fi
 }
 
 check_branch(){
-  if [ -z "$(git ls-remote --exit-code --heads origin $BRANCH_NAME)" ]; then
+  if [ -z "$(git ls-remote --exit-code --heads origin $REFNAME)" ]; then
     echo "remote branch does not exist, create it"
-    git checkout -b $BRANCH_NAME
-    git push --set-upstream origin $BRANCH_NAME
+    git checkout -b $REFNAME
+    git push --set-upstream origin $REFNAME
   fi
 }
 
@@ -50,14 +57,14 @@ sync_api(){
   cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
 
-  check_branch
 
  if [ $REFTYPE == "tag" ]; then
       check_tag
-      git tag $TAGNAME -a -m $MESSAGE
-      git push origin $TAGNAME
+      git tag $REFNAME -a -m $TAG_MESSAGEE
+      git push origin $REFNAME
       echo "push tag success~"
     else
+       check_branch
        git add .
        git commit -m $MESSAGE
        git push
