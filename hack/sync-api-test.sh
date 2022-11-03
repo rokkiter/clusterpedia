@@ -72,6 +72,7 @@ sync_api(){
   rm -rf $TMP_DIR
 }
 
+init_tag_message
 
 init_config
 
