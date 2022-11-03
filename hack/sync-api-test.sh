@@ -24,7 +24,6 @@ init_tag_message(){
   TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 }
 
-
 echo "test" $BRANCH_NAME
 
 
@@ -45,9 +44,11 @@ check_tag(){
 
 check_branch(){
   if [ -z "$(git ls-remote --exit-code --heads origin $BRANCH_NAME)" ]; then
-    echo "remote branch does not exist, create it"
-    git checkout -b $BRANCH_NAME
-    git push --set-upstream origin $BRANCH_NAME
+      echo "remote branch does not exist, create it"
+      git checkout -b $BRANCH_NAME
+      git push --set-upstream origin $BRANCH_NAME
+    else
+      git checkout $BRANCH_NAME
   fi
 }
 
@@ -58,6 +59,7 @@ sync_api(){
   cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
 
+  check_branch
 
  if [ $REFTYPE == "tag" ]; then
       check_tag
@@ -65,7 +67,6 @@ sync_api(){
       git push origin $TAGNAME
       echo "push tag success~"
     else
-       check_branch
        git add .
        git commit -m $MESSAGE
        git push
