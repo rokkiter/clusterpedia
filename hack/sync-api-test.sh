@@ -14,10 +14,12 @@ GITLAB_USER_NAME="rokkiter"
 
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
-raw=$(git branch -r --contains ${{ github.ref }})
+raw=$(git branch -r --contains $REF)
 BRANCH_NAME=${raw/origin\/}
 
-echo
+echo $BRANCH_NAME
+
+
 # init name && email config
 init_config(){
   git config --global user.email "$GITLAB_EMAIL"
