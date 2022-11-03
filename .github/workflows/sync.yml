@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
-      API_REPO_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      API_REPO_TOKEN: ${{ secrets.ACCESS_TOKEN_TEST }}
       MESSAGE: ${{ github.event.head_commit.message }}
       REFTYPE: ${{ github.ref_type }}
       TAGNAME: ${{ github.ref_name }}
