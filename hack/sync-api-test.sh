@@ -22,7 +22,6 @@ init_tag_message(){
 }
 
 
-echo "----" $REF
 
 
 # init name && email config

@@ -13,7 +13,6 @@ jobs:
       MESSAGE: ${{ github.event.head_commit.message }}
       REFTYPE: ${{ github.ref_type }}
       REFNAME: ${{ github.ref_name }}
-      REF: ${{ github.ref }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
@@ -24,5 +23,8 @@ jobs:
           path: ${{ env.WORKSPACE }}
           ref: ${{ github.ref }}
       - run: hack/sync-api-test.sh
-
+      - run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw/origin\/}
+          echo $branch
 
