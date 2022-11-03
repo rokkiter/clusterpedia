@@ -23,6 +23,9 @@ jobs:
           path: ${{ env.WORKSPACE }}
           ref: ${{ github.ref }}
 #       - run: hack/sync-api-test.sh
+      - name: Sync code
+        with:
+          ref: ${{ github.ref }}
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
