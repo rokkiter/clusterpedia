@@ -63,6 +63,7 @@ sync_api(){
 
 
  if [ $REFTYPE == "tag" ]; then
+      git push
       check_tag
       git tag $TAGNAME -a -m $TAG_MESSAGE
       git push origin $TAGNAME
