@@ -26,7 +26,6 @@ init_tag_message(){
 
 echo "test" $BRANCH_NAME
 
-
 # init name && email config
 init_config(){
   git config --global user.email "$GITLAB_EMAIL"
@@ -55,11 +54,14 @@ check_branch(){
 sync_api(){
   git clone $API_REPO $TMP_DIR
 
+  cd $TMP_DIR
   check_branch
+  cd -
 
   rm -rf $TMP_DIR/*
   cp -r $API_ROOT/* $TMP_DIR
   cd $TMP_DIR
+
 
 
  if [ $REFTYPE == "tag" ]; then
