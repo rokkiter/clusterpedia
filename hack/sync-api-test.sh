@@ -19,6 +19,10 @@ BRANCH_NAME=${raw/origin\/}
 
 TAG_MESSAGE=""
 
+install_filter_repo(){
+  python3 -m pip install --user git-filter-repo
+}
+
 # 获取 clusterpedia 的 tag message
 init_tag_message(){
   TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
