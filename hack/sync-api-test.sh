@@ -14,11 +14,22 @@ GITLAB_USER_NAME="rokkiter"
 
 TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 
+BRANCHNAME=$(git symbolic-ref --short HEAD)
 
+echo
 # init name && email config
 init_config(){
   git config --global user.email "$GITLAB_EMAIL"
   git config --global user.name "$GITLAB_USER_NAME"
+}
+
+# check tag, if exist, delete it
+check_tag(){
+  if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
+    echo "tag already exist, delete it before retag"
+    git push -d origin $TAGNAME
+    git tag -d $TAGNAME
+  fi
 }
 
 check_branch(){
@@ -37,18 +48,22 @@ sync_api(){
   cd $TMP_DIR
 
   check_branch
-  git add .
 
-  git commit -m $MESSAGE
-  git push
+ if [ $REFTYPE == "tag" ]; then
+      check_tag
+      git tag $TAGNAME -a -m $MESSAGE
+      git push origin $TAGNAME
+      echo "push tag success~"
+    else
+       git add .
+       git commit -m $MESSAGE
+       git push
+  fi
 
   cd -
   rm -rf $TMP_DIR
 }
 
-if [ $REFTYPE != 'branch' ]; then
-  exit 0
-fi
 
 init_config
 

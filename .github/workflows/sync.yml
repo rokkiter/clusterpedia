@@ -12,7 +12,7 @@ jobs:
       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
       MESSAGE: ${{ github.event.head_commit.message }}
       REFTYPE: ${{ github.ref_type }}
-      BRANCHNAME: ${{ github.ref_name }}
+      TAGNAME: ${{ github.ref_name }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
