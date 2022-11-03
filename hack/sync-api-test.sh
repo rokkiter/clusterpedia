@@ -17,7 +17,7 @@ TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
 raw=$(git branch -r --contains $REF)
 BRANCH_NAME=${raw/origin\/}
 
-echo $BRANCH_NAME
+echo "test" $BRANCH_NAME
 
 
 # init name && email config
