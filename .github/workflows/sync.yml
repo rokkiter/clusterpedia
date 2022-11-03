@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - 'staging/src/github.com/clusterpedia-io/api/*'
+    tags-ignore:
+      - '*'
 jobs:
   sync-api:
     name: Sync Api
@@ -11,6 +13,7 @@ jobs:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
       APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
       MESSAGE: ${{ github.event.head_commit.message }}
+      REFTYPE: ${{ github.ref_type }}
       BRANCHNAME: ${{ github.ref_name }}
     defaults:
       run:
