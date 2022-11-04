@@ -38,6 +38,7 @@ init_config(){
 
 # check tag, if exist, delete it
 check_tag(){
+  git tag -d $TAGNAME
   if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
     echo "tag already exist, delete it before retag"
     git push -d origin $TAGNAME
