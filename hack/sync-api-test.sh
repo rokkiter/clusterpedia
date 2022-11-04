@@ -77,7 +77,7 @@ sync_api(){
       git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
       git remote add origin $API_REPO
       check_branch
-      git push origin $BRANCH_NAME  --allow-unrelated-histories
+      git push origin $BRANCH_NAME  -f
   fi
 
 
