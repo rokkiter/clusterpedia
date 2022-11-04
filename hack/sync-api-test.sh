@@ -65,12 +65,11 @@ sync_api(){
       git tag $TAGNAME -a -m $TAG_MESSAGE
       git push origin $TAGNAME
       echo "push tag success~"
-      cd -
-      rm -rf $TMP_DIR
     else
       git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
       git remote add origin $API_REPO
       git push origin $BRANCH_NAME
+      echo "sync code success~"
   fi
 
 
