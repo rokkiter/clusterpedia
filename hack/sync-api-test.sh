@@ -6,13 +6,7 @@ set -o pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
-API_REPO="https://$API_REPO_TOKEN@github.com/rokkiter/api.git"
-
-# todo 放到secret里面
-GITLAB_EMAIL="101091030+rokkiter@users.noreply.github.com"
-GITLAB_USER_NAME="rokkiter"
-
-TMP_DIR="/tmp/clusterpedia-api-$RANDOM"
+API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
 
 raw=$(git branch -r --contains $REF)
 BRANCH_NAME=${raw/origin\/}
@@ -27,8 +21,6 @@ install_filter_repo(){
 init_tag_message(){
   TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 }
-
-echo "test" $BRANCH_NAME
 
 # init name && email config
 init_config(){
@@ -57,7 +49,6 @@ check_branch(){
 }
 
 sync_api(){
-
   if [ $REFTYPE == "tag" ]; then
       git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
       git remote add origin $API_REPO
@@ -71,8 +62,6 @@ sync_api(){
       git push origin $BRANCH_NAME
       echo "sync code success~"
   fi
-
-
 }
 
 install_filter_repo
