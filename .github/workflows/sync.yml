@@ -1,23 +1,19 @@
 name: Sync Api
 on:
   push:
-#     TODO 在测试分支测试
-    branches:
-      - sync-api
     paths:
       - 'staging/src/github.com/clusterpedia-io/api/*'
-    tags:
-      - v*
 jobs:
   sync-api:
     name: Sync Api
     runs-on: ubuntu-latest
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
-      APIREPOTOKEN: ${{ secrets.ACCESS_TOKEN }}
+      GH_TOKEN: ${{ secrets.CLUSTERPEDIA_BOT_TOKEN }}
+      MESSAGE: ${{ github.event.head_commit.message }}
       REFTYPE: ${{ github.ref_type }}
       TAGNAME: ${{ github.ref_name }}
-      MESSAGE: ${{ github.event.head_commit.message }}
+      REF: ${{ github.ref }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
@@ -25,8 +21,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
+          token: ${{ secrets.ACCESS_TOKEN }}
           path: ${{ env.WORKSPACE }}
           ref: ${{ github.ref }}
-      - run: hack/sync-api-test.sh
-
-
+          fetch-depth: 0
+      - run: hack/sync-api.sh
