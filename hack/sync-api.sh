@@ -46,33 +46,33 @@ BRANCH_NAME=${raw/origin\/}
 
 
 install_filter_repo(){
-  python3 -m pip install --user git-filter-repo
+    python3 -m pip install --user git-filter-repo
 }
 
 TAG_MESSAGE=""
 # 获取 clusterpedia 的 tag message
 init_tag_message(){
-  TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
+    TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 }
 
 # check tag, if exist, delete it
 check_tag(){
-  git tag -d $TAGNAME
-  if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
-    echo "tag already exist, delete it before retag"
-    git push -d origin $TAGNAME
     git tag -d $TAGNAME
-  fi
+    if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
+        echo "tag already exist, delete it before retag"
+        git push -d origin $TAGNAME
+        git tag -d $TAGNAME
+    fi
 }
 
 check_branch(){
-  if [ -z "$(git ls-remote --exit-code --heads origin $BRANCH_NAME)" ]; then
-      echo "remote branch does not exist, create
-      git checkout -b $BRANCH_NAME
-      git push --set-upstream origin $BRANCH_NAME
+    if [ -z "$(git ls-remote --exit-code --heads origin $BRANCH_NAME)" ]; then
+        echo "remote branch does not exist, create"
+        git checkout -b $BRANCH_NAME
+        git push --set-upstream origin $BRANCH_NAME
     else
-      git checkout $BRANCH_NAME
-  fi
+        git checkout $BRANCH_NAME
+    fi
 }
 
 sync_api(){
