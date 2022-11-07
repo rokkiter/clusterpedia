@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# todo rename rokkiter line 17 , 37
+# todo rename rokkiter line 17 , 41
 function usage() {
     cat <<EOF
 Build components:
