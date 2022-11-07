@@ -67,7 +67,7 @@ check_tag(){
 
 check_branch(){
     if [ -z "$(git ls-remote --exit-code --heads origin $BRANCH_NAME)" ]; then
-        echo "remote branch does not exist, create"
+        echo "remote branch does not exist, create it"
         git checkout -b $BRANCH_NAME
         git push --set-upstream origin $BRANCH_NAME
     else
@@ -91,7 +91,7 @@ sync_api(){
   fi
 }
 
-install_filter_repo it"
+install_filter_repo
 
 init_tag_message
 
