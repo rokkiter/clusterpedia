@@ -7,22 +7,25 @@ set -o pipefail
 function usage() {
     cat <<EOF
 ENV:
-    API_ROOT: clusterpedia api path, required if the pwd is not the api path.
-        eg. API_ROOT=/home/runner/work/clusterpedia/staging/src/github.com/clusterpedia-io/api
+    RAW: current repo the branch which contain github action ${{ github_ref }}
+    BRANCH_NAME: current branch name
+        eg. BRANCH_NAME=main
     GH_TOKEN: github token for api repo auth.
 EOF
 }
 
-set +e; REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null);set -e
-if [ -z $REPO_ROOT ]; then
-    if [ -z $API_ROOT ]; then
-        echo "the current directory is not in the clusterpedia api path, please set API_ROOT=<clusterpedia api path>"
-        usage
+set +e; RAW=$(git branch -r --contains $REF 2>/dev/null);set -e
+if [ -z $RAW ]; then
+    echo "the current directory is not in the clusterpedia path"
+    usege
     exit 1
-    fi
-    echo $(pwd)
 else
-    API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
+    BRANCH_NAME=${raw/origin\/}
+    if [ -z $BRANCH_NAME ]; then
+        echo "can not get current branch"
+        usage
+        exit 1
+    fi
 fi
 
 if [ -z $GH_TOKEN ]; then
@@ -30,19 +33,15 @@ if [ -z $GH_TOKEN ]; then
     usage
     exit 1
 else
-    #todo  测试用，
+    #todo  测试仓库，需修改
     API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
 fi
-
-raw=$(git branch -r --contains $REF)
-BRANCH_NAME=${raw/origin\/}
 
 TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 
 install_filter_repo(){
     python3 -m pip install --user git-filter-repo
 }
-
 
 # check tag, if exist, delete it
 check_tag(){
@@ -51,16 +50,6 @@ check_tag(){
         echo "tag already exist, delete it before retag"
         git push -d origin $TAGNAME
         git tag -d $TAGNAME
-    fi
-}
-
-check_branch(){
-    if [ -z "$(git ls-remote --exit-code --heads origin $BRANCH_NAME)" ]; then
-        echo "remote branch does not exist, create it"
-        git checkout -b $BRANCH_NAME
-        git push --set-upstream origin $BRANCH_NAME
-    else
-        git checkout $BRANCH_NAME
     fi
 }
 
