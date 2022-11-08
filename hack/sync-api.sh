@@ -30,7 +30,8 @@ if [ -z $GH_TOKEN ]; then
     usage
     exit 1
 else
-    API_REPO="https://$GH_TOKEN@github.com/clusterpedia/api.git"
+    #todo  测试用，
+    API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
 fi
 
 raw=$(git branch -r --contains $REF)
