@@ -20,7 +20,7 @@ if [ -z $RAW ]; then
     usege
     exit 1
 else
-    BRANCH_NAME=${raw/origin\/}
+    BRANCH_NAME=${RAW/origin\/}
     if [ -z $BRANCH_NAME ]; then
         echo "can not get current branch"
         usage
