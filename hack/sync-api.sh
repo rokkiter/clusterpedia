@@ -20,7 +20,7 @@ if [ -z $REPO_ROOT ]; then
         usage
     exit 1
     fi
-    REPO_ROOT=$(pwd)
+    echo $(pwd)
 else
     API_ROOT="${REPO_ROOT}/staging/src/github.com/clusterpedia-io/api"
 fi
