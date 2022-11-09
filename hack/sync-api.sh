@@ -33,9 +33,12 @@ if [ -z $GH_TOKEN ]; then
     usage
     exit 1
 fi
-
 #todo  need change
 API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
+
+if [ ! -d "staging/src/github.com/clusterpedia-io/api" ];then
+    echo "the current directory is not in the clusterpedia root path, please run"
+fi
 
 TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 
@@ -54,6 +57,7 @@ check_tag(){
 }
 
 sync_api(){
+
   if [ $REFTYPE == "tag" ]; then
       git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
       git remote add origin $API_REPO

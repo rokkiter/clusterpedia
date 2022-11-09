@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
+      REF: ${{ github.ref }}
     defaults:
       run:
         working-directory: ${{ env.WORKSPACE }}
