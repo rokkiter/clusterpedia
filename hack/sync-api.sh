@@ -14,6 +14,12 @@ ENV:
 EOF
 }
 
+API_ROOT="staging/src/github.com/clusterpedia-io/api"
+if [ ! -d $API_ROOT ];then
+    echo "can not find API_ROOT in the path, please check in the clusterpedia root path"
+    exit 1
+fi
+
 set +e; RAW=$(git branch -r --contains $REF 2>/dev/null);set -e
 if [ -z $RAW ]; then
     echo "the current directory is not in the clusterpedia path"
@@ -36,10 +42,6 @@ fi
 #todo  need change
 API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
 
-if [ ! -d "staging/src/github.com/clusterpedia-io/api" ];then
-    echo "the current directory is not in the clusterpedia root path, please run"
-fi
-
 TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 
 install_filter_repo(){
@@ -59,14 +61,14 @@ check_tag(){
 sync_api(){
 
   if [ $REFTYPE == "tag" ]; then
-      git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
+      git filter-repo --subdirectory-filter $API_ROOT --force
       git remote add origin $API_REPO
       check_tag
       git tag $TAGNAME -a -m $TAG_MESSAGE
       git push origin $TAGNAME
       echo "push tag success~"
     else
-      git filter-repo --subdirectory-filter staging/src/github.com/clusterpedia-io/api --force
+      git filter-repo --subdirectory-filter $API_ROOT --force
       git remote add origin $API_REPO
       git push origin $BRANCH_NAME
       echo "sync code success~"
