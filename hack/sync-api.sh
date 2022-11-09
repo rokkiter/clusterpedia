@@ -34,7 +34,8 @@ if [ -z $GH_TOKEN ]; then
     exit 1
 fi
 
-API_REPO="https://$GH_TOKEN@github.com/clusterpedia/api.git"
+#todo  need change
+API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
 
 TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 
