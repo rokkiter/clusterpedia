@@ -19,22 +19,22 @@ if [ -z $RAW ]; then
     echo "the current directory is not in the clusterpedia path"
     usege
     exit 1
-else
-    BRANCH_NAME=${RAW/origin\/}
-    if [ -z $BRANCH_NAME ]; then
-        echo "can not get current branch"
-        usage
-        exit 1
-    fi
+fi
+
+BRANCH_NAME=${RAW/origin\/}
+if [ -z $BRANCH_NAME ]; then
+    echo "can not get current branch"
+    usage
+    exit 1
 fi
 
 if [ -z $GH_TOKEN ]; then
-    echo "the github token is not in the env, please check CLUSTERPEDIA_BOT_TOKEN"
+    echo "the github token is not in the env, please check GH_TOKEN"
     usage
     exit 1
-else
-    API_REPO="https://$GH_TOKEN@github.com/clusterpedia/api.git"
 fi
+
+API_REPO="https://$GH_TOKEN@github.com/clusterpedia/api.git"
 
 TAG_MESSAGE=$(git tag -l --format="%(contents)" $TAGNAME)
 
