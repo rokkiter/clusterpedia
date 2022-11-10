@@ -58,11 +58,11 @@ check_tag(){
 }
 
 sync_api(){
+
   if [ $REFTYPE == "tag" ]; then
       git filter-repo --subdirectory-filter $API_ROOT --force
       git remote add origin $API_REPO
       check_tag
-      git tag $TAGNAME -a -m $TAG_MESSAGE
       git push origin $TAGNAME
       echo "push tag success~"
     else
