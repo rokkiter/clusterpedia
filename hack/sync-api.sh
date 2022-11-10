@@ -53,7 +53,6 @@ check_tag(){
     if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
         echo "tag already exist, delete it before retag"
         git push -d origin $TAGNAME
-        git tag -d $TAGNAME
     fi
 }
 
