@@ -58,13 +58,13 @@ check_tag(){
 
 sync_api(){
   if [ $REFTYPE == "tag" ]; then
-      git filter-repo --subdirectory-filter $API_ROOT --force
+      git filter-repo --subdirectory-filter $API_ROOT
       git remote add origin $API_REPO
       check_tag
       git push origin $TAGNAME
       echo "push tag success~"
     else
-      git filter-repo --subdirectory-filter $API_ROOT --force
+      git filter-repo --subdirectory-filter $API_ROOT
       git remote add origin $API_REPO
       git push origin $BRANCH_NAME
       echo "sync code success~"
