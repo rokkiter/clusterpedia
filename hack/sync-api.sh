@@ -42,9 +42,9 @@ create_tmp_dir(){
 
 # check tag, if exist, delete it
 check_tag(){
-    if [ -n "$(git ls-remote --tags api-origin -l $TAGNAME)" ]; then
+    if [ -n "$(git ls-remote --tags api-origin -l $REFNAME)" ]; then
         echo "tag already exist, delete it before retag"
-        git push -d api-origin $TAGNAME
+        git push -d api-origin $REFNAME
     fi
 }
 
