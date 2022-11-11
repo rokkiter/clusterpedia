@@ -14,6 +14,8 @@ ENV:
 EOF
 }
 
+pwd
+
 API_ROOT="staging/src/github.com/clusterpedia-io/api"
 if [ ! -d $API_ROOT ];then
     echo "can not find API_ROOT in the path, please check in the clusterpedia root path"
