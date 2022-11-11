@@ -7,8 +7,6 @@ set -o pipefail
 function usage() {
     cat <<EOF
 ENV:
-    REF: if you want to push code to api repo in one branch the format is refs/heads/<branch_name>,
-         if you want to push tag to api repo the format is is refs/tags/<tag_name>
     REFTYPE: the current operation is tag or sync code. if it is undefined, it defaults to branch
         eg. REFTYPE=tag  or  REFTYPE=branch
     REFNAME: the name of the branch or tag, when REFTYPE=tag it mean the name of tag,
@@ -23,26 +21,13 @@ if [ ! -d $API_ROOT ];then
     exit 1
 fi
 
-set +e; RAW=$(git branch -r --contains $REF 2>/dev/null);set -e
-if [ -z $RAW ]; then
-    echo "the current directory is not in the clusterpedia path"
-    usege
-    exit 1
-fi
-
 if [ -z $GH_TOKEN ]; then
     echo "the github token is not in the env, please check GH_TOKEN"
     usage
     exit 1
 fi
 
-if [ -z $REFNAME ]; then
-    echo "can not find refg"
-    usage
-    exit 1
-fi
-
-API_REPO="https://$GH_TOKEN@github.com/clusterpedia/api.git"
+API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
 
 install_filter_repo(){
     python3 -m pip install --user git-filter-repo
