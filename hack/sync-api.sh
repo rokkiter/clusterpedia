@@ -72,14 +72,14 @@ sync_api(){
   create_tmp_dir
   if [ $REFTYPE == "tag" ]; then
       git filter-repo --subdirectory-filter $API_ROOT
-      git remote add origin $API_REPO
+      git remote add api-origin $API_REPO
       check_tag
-      git push origin $TAGNAME
+      git push api-origin $TAGNAME
       echo "push tag success~"
     else
       git filter-repo --subdirectory-filter $API_ROOT
-      git remote add origin $API_REPO
-      git push origin $BRANCH_NAME
+      git remote add api-origin $API_REPO
+      git push api-origin $BRANCH_NAME
       echo "sync code success~"
   fi
   clean_tmp_dir
