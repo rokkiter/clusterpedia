@@ -48,6 +48,17 @@ install_filter_repo(){
     python3 -m pip install --user git-filter-repo
 }
 
+TMP_CLUSTERPEDIA=/tmp/clusterpedia
+create_tmp_dir(){
+    mkdir -p $TMP_CLUSTERPEDIA && cp -rf ./* $TMP_CLUSTERPEDIA
+    cd  $TMP_CLUSTERPEDIA
+}
+
+clean_tmp_dir(){
+    cd /tmp
+    rm -rf $TMP_CLUSTERPEDIA
+}
+
 # check tag, if exist, delete it
 check_tag(){
     if [ -n "$(git ls-remote --tags origin -l $TAGNAME)" ]; then
@@ -57,6 +68,7 @@ check_tag(){
 }
 
 sync_api(){
+  create_tmp_dir
   if [ $REFTYPE == "tag" ]; then
       git filter-repo --subdirectory-filter $API_ROOT
       git remote add origin $API_REPO
@@ -69,6 +81,7 @@ sync_api(){
       git push origin $BRANCH_NAME
       echo "sync code success~"
   fi
+  clean_tmp_dir
 }
 
 install_filter_repo
