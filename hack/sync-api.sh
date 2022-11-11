@@ -83,6 +83,7 @@ sync_api(){
       git remote add api-origin $API_REPO
       git push api-origin $BRANCH_NAME
       echo "sync code success~"
+      exit 1
   fi
   clean_tmp_dir
 }
