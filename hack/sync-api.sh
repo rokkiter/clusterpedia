@@ -50,12 +50,13 @@ install_filter_repo(){
 
 TMP_CLUSTERPEDIA=/tmp/clusterpedia
 create_tmp_dir(){
-    mkdir -p $TMP_CLUSTERPEDIA && cp -rf ./* $TMP_CLUSTERPEDIA
-    cd  $TMP_CLUSTERPEDIA
+    mkdir -p $TMP_CLUSTERPEDIA
+    git clone ./ $TMP_CLUSTERPEDIA
+    cd $TMP_CLUSTERPEDIA
 }
 
 clean_tmp_dir(){
-    cd /tmp
+    cd -
     rm -rf $TMP_CLUSTERPEDIA
 }
 
