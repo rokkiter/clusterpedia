@@ -33,7 +33,7 @@ if [ -z $REFNAME ]; then
     exit 1
 fi
 
-API_REPO="https://$GH_TOKEN@github.com/clusterpedia/api.git"
+API_REPO="https://$GH_TOKEN@github.com/rokkiter/api.git"
 
 install_filter_repo(){
     python3 -m pip install --user git-filter-repo

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WORKSPACE: ${{ github.workspace }}/src/github.com/clusterpedia-io/clusterpedia
-      GH_TOKEN: ${{ secrets.CLUSTERPEDIA_BOT_TOKEN }}
+      GH_TOKEN: ${{ secrets.ACCESS_TOKEN_TEST }}
       MESSAGE: ${{ github.event.head_commit.message }}
       REFTYPE: ${{ github.ref_type }}
       REFNAME: ${{ github.ref_name }}
@@ -21,7 +21,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.CLUSTERPEDIA_BOT_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN_TEST }}
           path: ${{ env.WORKSPACE }}
           ref: ${{ github.ref }}
           fetch-depth: 0
