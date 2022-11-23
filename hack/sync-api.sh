@@ -51,16 +51,18 @@ install_filter_repo(){
 }
 
 TMP_CLUSTERPEDIA=/tmp/clusterpedia
+clean_tmp_dir(){
+    rm -rf $TMP_CLUSTERPEDIA
+}
+trap clean_tmp_dir EXIT
+
 create_tmp_dir(){
     mkdir -p $TMP_CLUSTERPEDIA
     git clone ./ $TMP_CLUSTERPEDIA
     cd $TMP_CLUSTERPEDIA
 }
 
-clean_tmp_dir(){
-    cd -
-    rm -rf $TMP_CLUSTERPEDIA
-}
+
 
 # check tag, if exist, delete it
 check_tag(){
@@ -84,7 +86,6 @@ sync_api(){
       git push api-origin $BRANCH_NAME
       echo "sync code success~"
   fi
-  clean_tmp_dir
 }
 
 install_filter_repo
